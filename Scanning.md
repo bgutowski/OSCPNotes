@@ -1,15 +1,15 @@
 ### PORTS SCANNING
 
 ```
-nmap -sV -O -T4 -n -Pn -sC $IP --open
+nmap -sV -O -T4 -n -Pn -sC $RHOST --open
 
-nmap -sV -sC -O -T4 -n -Pn -p- --open
+nmap -sV -sC -O -T4 -n -Pn -p- $RHOST --open
 
-nmap -sV -sC -O -p- -n -Pn $IP
+nmap -sV -sC -O -p- -n -Pn $RHOST
 
-nmap -sU -sV --version-intensity 0 -F -n -T4 $IP
+nmap -sU -sV --version-intensity 0 -F -n -T4 $RHOST
 
-nmap -sU -sV -sC -F -n -Pn $IP
+nmap -sU -sV -sC -F -n -Pn $RHOST
 ```
 
 ### NETWORK SCANNING
