@@ -1,6 +1,8 @@
 ## Linux 
 [Hacktricks - Linux PrivEsc](https://book.hacktricks.xyz/linux-hardening/privilege-escalation)
 
+[PayloadAllThings - Linux PrivEsc](https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology%20and%20Resources/Linux%20-%20Privilege%20Escalation.md)
+
 ### OS Info
 ```powershell
 (cat /proc/version || uname -a ) 2>/dev/null
@@ -157,6 +159,17 @@ done
 ```
 
 ## Windows
+[HackTricks - Windows PrivEsc](https://book.hacktricks.xyz/windows-hardening/windows-local-privilege-escalation)
+
+[PayloadAllThings - Windows PrivEsc](https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology%20and%20Resources/Windows%20-%20Privilege%20Escalation.md)
+
+
+### Tools
+.NET-v4
+[Winpeas](https://github.com/carlospolop/PEASS-ng/tree/master/winPEAS)
+
+[windows-exploit-suggester](https://github.com/AonCyberLabs/Windows-Exploit-Suggester)
+
 
 ### OS Info
 ```powershell
@@ -201,9 +214,20 @@ net share
 powershell Find-DomainShare -ComputerDomain domain.local
 ```
 
-###Passwords
+### Passwords
 ```powershell
 cd C:\ & findstr /SI /M "password" *.xml *.ini *.txt
 findstr /si password *.xml *.ini *.txt *.config 2>nul >> results.txt
 findstr /spin "password" *.*
+```
+
+### Antivirus
+```powershell
+sc query windefend
+
+Working services
+sc queryex type=service
+
+netsh firewall show state
+netsh firewall show config
 ```
