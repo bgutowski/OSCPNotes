@@ -1,3 +1,5 @@
+[HackTrick - File Uploads](https://book.hacktricks.xyz/pentesting-web/file-upload)
+
 ## Windows
 
 ### CertUtil.exe
