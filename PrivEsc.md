@@ -8,12 +8,6 @@ lsb_release -a 2>/dev/null # old, not by default on many systems
 cat /etc/os-release 2>/dev/null # universal on modern systems
 ```
 
-
-### Path
-```powershell
-echo $PATH
-```
-
 ### Env variables
 ```powershell
 (env || set) 2>/dev/null
@@ -33,6 +27,11 @@ sudo -V | grep "Sudo ver" | grep "1\.[01234567]\.[0-9]\+\|1\.8\.1[0-9]\*\|1\.8\.
 ### Useful bin
 ```powershell
 which nmap aws nc ncat netcat nc.traditional wget curl ping gcc g++ make gdb base64 socat python python2 python3 python2.7 python2.6 python3.6 python3.7 perl php ruby xterm doas sudo fetch docker lxc ctr runc rkt kubectl 2>/dev/null
+```
+### Password files
+```bash
+grep --color=auto -rnw '/' -ie "PASSWORD" --color=always 2> /dev/null
+find . -type f -exec grep -i -I "PASSWORD" {} /dev/null \;
 ```
 
 ### Installed compilers
@@ -155,4 +154,56 @@ for g in `groups`;
       find / '(' -type f -or -type d ')' -group $g -perm -g=w ! -path "/proc/*" ! -path "/sys/*" ! -path "$HOME/*" 2>/dev/null
       done
 done
+```
+
+## Windows
+
+### OS Info
+```powershell
+systeminfo | findstr /B /C:"Host Name" /C:"OS Name" /C:"OS Version" /C:"System Type"
+```
+
+### Patches
+```powershell
+wmic qfe get Caption,Description,HotFixID,InstalledOn
+```
+
+### Disks
+```powershell
+wmic logicaldisk get caption || fsutil fsinfo drives
+wmic logicaldisk get caption,description,providername
+Get-PSDrive | where {$_.Provider -like "Microsoft.PowerShell.Core\FileSystem"}| ft Name,Root
+``` 
+
+### Users
+```powershell
+echo %USERNAME% || whoami
+$env:username
+whoami /priv
+whoami /groups
+```
+
+### Network
+```powershell
+ipconfig /all
+Get-NetIPConfiguration | ft InterfaceAlias,InterfaceDescription,IPv4Address
+Get-DnsClientServerAddress -AddressFamily IPv4 | ft
+
+arp -a
+Get-NetNeighbor -AddressFamily IPv4 | ft ifIndex,IPAddress,LinkLayerAddress,State
+
+route print
+Get-NetRoute -AddressFamily IPv4 | ft DestinationPrefix,NextHop,RouteMetric,ifIndex
+
+netstat -ano
+
+net share
+powershell Find-DomainShare -ComputerDomain domain.local
+```
+
+###Passwords
+```powershell
+cd C:\ & findstr /SI /M "password" *.xml *.ini *.txt
+findstr /si password *.xml *.ini *.txt *.config 2>nul >> results.txt
+findstr /spin "password" *.*
 ```
